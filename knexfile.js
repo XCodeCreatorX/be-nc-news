@@ -19,7 +19,7 @@ const customConfig = {
     },
   },
   test: {
-    connection: {
+    connection: { 
       database: "nc_news_test",
       user: "jcomputer",
       password: "password",
