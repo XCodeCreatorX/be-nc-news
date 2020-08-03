@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/northcoders/be-nc-news#readme",
   "dependencies": {
-    "knex": "^0.21.2"
+    "knex": "^0.21.2",
+    "pg": "^8.3.0"
   },
   "devDependencies": {}
 }
