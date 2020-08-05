@@ -6,7 +6,7 @@
   "scripts": {
     "setup-dbs": "psql -f ./db/setup.sql",
     "seed": "knex seed:run",
-    "test": "knex migrate:latest && npm run seed && jest --verbose=false api.test.js",
+    "test": "jest api.test.js",
     "migrate-latest": "knex migrate:latest",
     "migrate-rollback": "knex migrate:rollback"  
   },
