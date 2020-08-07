@@ -133,7 +133,7 @@ describe("/api", () => {
     });
   });
   describe("/articles/:article_id/comments", () => {
-    test.only("POST 200 - Responds with a status of 200", () => {
+    test("POST 200 - Responds with a status of 200", () => {
       return request(app)
         .post("/api/articles/1/comments")
         .send({ username: "newUser", body: "This is a great comment." })
