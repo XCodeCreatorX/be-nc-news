@@ -4,7 +4,7 @@ const {
   formatComments,
 } = require("../db/utils/utils");
 
-xdescribe("formatDates", () => {
+describe("formatDates", () => {
   test("When input is an empty array, return a new empty array.", () => {
     expect(formatDates([])).toEqual([]);
   });
@@ -79,13 +79,13 @@ xdescribe("formatDates", () => {
         body: "Bastet walks amongst us, and the cats are taking arms!",
         created_at: date2,
       },
-    ];
+    ]; 
 
     expect(formatDates(input)).toEqual(output);
   });
 });
 
-xdescribe("makeRefObj", () => {
+describe("makeRefObj", () => {
   test("If input is an empty array, return an empty object", () => {
     expect(makeRefObj([])).toEqual({});
   });

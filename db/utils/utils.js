@@ -10,7 +10,7 @@ exports.formatDates = (list) => {
   }
 
   return formattedDataArr;
-};
+}; 
 
 exports.makeRefObj = (list) => {
   const dataArr = [...list];

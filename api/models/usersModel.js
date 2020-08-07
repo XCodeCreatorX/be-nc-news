@@ -6,7 +6,13 @@ exports.sendUserByName = (username) => {
     .from("users")
     .where("username", username)
     .then((user) => {
-      console.log(user)
-      return user;
+      if (user.length > 0) {
+        return user;
+      } else {
+        return Promise.reject({
+          status: 400,
+          msg: "User does not exist.",
+        });
+      }
     });
 };

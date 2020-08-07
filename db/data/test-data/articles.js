@@ -6,7 +6,7 @@ module.exports = [
     body: 'I find this existence challenging',
     created_at: 1542284514171,
     votes: 100,
-  },
+  }, 
   {
     title: 'Sony Vaio; or, The Laptop',
     topic: 'mitch',

@@ -9,6 +9,14 @@ describe("/api", () => {
   beforeEach(() => {
     return connection.seed.run();
   });
+  test("GET 400 - Bad request when path is incorrect with an error message. ", () => {
+    return request(app)
+      .get("/api/not-a-path")
+      .expect(400)
+      .then((result) => {
+        expect(result.body.msg).toBe("Path does not exist.");
+      });
+  });
   describe("/topics", () => {
     test("GET 200 - Responds with a status code of 200", () => {
       return request(app).get("/api/topics").expect(200);
@@ -40,11 +48,69 @@ describe("/api", () => {
           expect(user.body.user[0]).toEqual(output);
         });
     });
+    test("GET 400 - Bad request when the username is incorrect with an error message.", () => {
+      return request(app)
+        .get("/api/users/notausername")
+        .expect(400)
+        .then((result) => {
+          expect(result.body.msg).toBe("User does not exist.");
+        });
+    });
   });
   describe("/articles", () => {
     test("GET 200 - Responds with a status code of 200", () => {
       return request(app).get("/api/articles/1").expect(200);
     });
-    test("GET 200 - Responds with an object containing the specific article details", () => {});
+    test("GET 200 - Responds with an object containing the specific article details", () => {
+      return request(app)
+        .get("/api/articles/1")
+        .expect(200)
+        .then((article) => {
+          const output = {
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            topic: "mitch",
+            author: "butter_bridge",
+            body: "I find this existence challenging",
+            created_at: expect.any(String),
+            votes: 100,
+            comment_count: "1",
+          };
+          expect(article.body.article).toEqual(output);
+        });
+    });
+    test("GET 400 - Responds with an error if the article does not exist.", () => {
+      return request(app)
+        .get("/api/articles/987")
+        .expect(400)
+        .then((result) => {
+          expect(result.body.msg).toBe("Article does not exist.");
+        });
+    });
+    test("PATCH 200 - Responds with a status code of 200", () => {
+      return request(app)
+      .patch("/api/articles/1")
+      .send({inc_votes : 10})
+      .expect(200);
+    })
+    test.only("PATCH 200 - Responds with an updated article", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ inc_votes: 10 })
+        .expect(200)
+        .then((article) => {
+          const output = {
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            topic: "mitch",
+            author: "butter_bridge",
+            body: "I find this existence challenging",
+            created_at: expect.any(String),
+            votes: 110,
+            comment_count: "1",
+          };
+          expect(article.body.article).toEqual(output);
+        });
+    })
   });
 });
