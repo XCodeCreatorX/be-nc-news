@@ -4,7 +4,7 @@ exports.getArticleByID = (req, res, next) => {
   const id = req.params.id;
   sendArticleByID(id)
     .then((article) => {
-      res.status(200).send({ "article": article });
+      res.status(200).send({ article: article });
     })
     .catch((err) => {
       next(err);
@@ -14,10 +14,8 @@ exports.getArticleByID = (req, res, next) => {
 exports.patchArticleByID = (req, res, next) => {
   const { id } = req.params;
   const inc_votes = req.body.inc_votes;
-  console.log(id, inc_votes)
 
-  editArticleByID(id, inc_votes)
-  .then(article => {
-    res.status(200).send({ "article": article})
-  })
-}
+  editArticleByID(id, inc_votes).then((article) => {
+    res.status(200).send({ article: article });
+  });
+};

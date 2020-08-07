@@ -89,16 +89,17 @@ describe("/api", () => {
     });
     test("PATCH 200 - Responds with a status code of 200", () => {
       return request(app)
-      .patch("/api/articles/1")
-      .send({inc_votes : 10})
-      .expect(200);
-    })
-    test.only("PATCH 200 - Responds with an updated article", () => {
+        .patch("/api/articles/1")
+        .send({ inc_votes: 10 })
+        .expect(200);
+    });
+    test("PATCH 200 - Responds with an updated article [Postive Number]", () => {
       return request(app)
         .patch("/api/articles/1")
         .send({ inc_votes: 10 })
         .expect(200)
         .then((article) => {
+          console.log(article.body);
           const output = {
             article_id: 1,
             title: "Living in the shadow of a great man",
@@ -107,10 +108,28 @@ describe("/api", () => {
             body: "I find this existence challenging",
             created_at: expect.any(String),
             votes: 110,
-            comment_count: "1",
           };
           expect(article.body.article).toEqual(output);
         });
-    })
+    });
+    test("PATCH 200 - Responds with an updated article [Negative Number]", () => {
+      return request(app)
+        .patch("/api/articles/1")
+        .send({ inc_votes: -10 })
+        .expect(200)
+        .then((article) => {
+          console.log(article.body.article)
+          const output = {
+            article_id: 1,
+            title: "Living in the shadow of a great man",
+            topic: "mitch",
+            author: "butter_bridge",
+            body: "I find this existence challenging",
+            created_at: expect.any(String),
+            votes: 90,
+          };
+          expect(article.body.article).toEqual(output);
+        });
+    });
   });
 });

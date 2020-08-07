@@ -19,9 +19,13 @@ exports.sendArticleByID = (id) => {
 };
 
 exports.editArticleByID = (id, inc_votes) => {
-  return connection("articles")
-    .where("article_id", id)
-    .then((article) => {
-      return article;
-    });
+  return connection
+    .select("articles.*")
+    .from("articles")
+    .count("comments.comment_id as comment_count")
+    .increment("votes", inc_votes)
+    .returning("*")
+    .then((updatedArticle) => {
+      return updatedArticle[0]
+    })
 };
