@@ -20,7 +20,7 @@ exports.sendArticleByID = (id) => {
 
 exports.editArticleByID = (id, inc_votes) => {
   return connection("articles")
-    .where("article_id", i)
+    .where("article_id", id)
     .then((article) => {
       return article;
     });
