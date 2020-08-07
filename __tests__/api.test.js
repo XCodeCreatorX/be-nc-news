@@ -118,7 +118,7 @@ describe("/api", () => {
         .send({ inc_votes: -10 })
         .expect(200)
         .then((article) => {
-          console.log(article.body.article)
+          console.log(article.body.article);
           const output = {
             article_id: 1,
             title: "Living in the shadow of a great man",
@@ -130,6 +130,14 @@ describe("/api", () => {
           };
           expect(article.body.article).toEqual(output);
         });
+    });
+  });
+  describe("/articles/:article_id/comments", () => {
+    test.only("POST 200 - Responds with a status of 200", () => {
+      return request(app)
+        .post("/api/articles/1/comments")
+        .send({ username: "newUser", body: "This is a great comment." })
+        .expect(200);
     });
   });
 });
