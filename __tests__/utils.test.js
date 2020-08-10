@@ -112,7 +112,7 @@ describe("makeRefObj", () => {
   });
 });
 
-xdescribe("formatComments", () => {
+describe("formatComments", () => {
   test("When input is an empty array, return a new empty array.", () => {
     expect(formatComments([], {})).toEqual([]);
   }),

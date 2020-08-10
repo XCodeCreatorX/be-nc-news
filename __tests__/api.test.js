@@ -9,10 +9,10 @@ describe("/api", () => {
   beforeEach(() => {
     return connection.seed.run();
   });
-  test("GET 400 - Bad request when path is incorrect with an error message. ", () => {
+  test("GET 404 - Bad request when path is incorrect with an error message. ", () => {
     return request(app)
       .get("/api/not-a-path")
-      .expect(400)
+      .expect(404)
       .then((result) => {
         expect(result.body.msg).toBe("Path does not exist.");
       });
@@ -79,10 +79,10 @@ describe("/api", () => {
           expect(article.body.article).toEqual(output);
         });
     });
-    test("GET 400 - Responds with an error if the article does not exist.", () => {
+    test("GET 404 - Responds with an error if the article does not exist.", () => {
       return request(app)
         .get("/api/articles/987")
-        .expect(400)
+        .expect(404)
         .then((result) => {
           expect(result.body.msg).toBe("Article does not exist.");
         });
@@ -99,7 +99,6 @@ describe("/api", () => {
         .send({ inc_votes: 10 })
         .expect(200)
         .then((article) => {
-          console.log(article.body);
           const output = {
             article_id: 1,
             title: "Living in the shadow of a great man",
@@ -118,7 +117,6 @@ describe("/api", () => {
         .send({ inc_votes: -10 })
         .expect(200)
         .then((article) => {
-          console.log(article.body.article);
           const output = {
             article_id: 1,
             title: "Living in the shadow of a great man",
