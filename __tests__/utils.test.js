@@ -37,7 +37,7 @@ describe("formatDates", () => {
         created_at: date,
         votes: 100,
       },
-    ];
+    ]; 
 
     expect(formatDates(input)).toEqual(output);
   });
