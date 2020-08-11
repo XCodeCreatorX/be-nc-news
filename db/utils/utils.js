@@ -12,12 +12,11 @@ exports.formatDates = (list) => {
 }; 
 
 exports.makeRefObj = (list) => {
-  const dataArr = [...list];
   let refObj = {};
 
-  for (let i = 0; i < dataArr.length; i++) {
-    const articleID = dataArr[i].article_id;
-    const title = dataArr[i].title;
+  for (let i = 0; i < list.length; i++) {
+    const articleID = list[i].article_id;
+    const title = list[i].title;
     refObj[title] = articleID;
   }
   return refObj;

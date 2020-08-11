@@ -48,10 +48,10 @@ describe("/api", () => {
           expect(user.body.user[0]).toEqual(output);
         });
     });
-    test("GET 400 - Bad request when the username is incorrect with an error message.", () => {
+    test("GET 404 - Bad request when the username is incorrect with an error message.", () => {
       return request(app)
         .get("/api/users/notausername")
-        .expect(400)
+        .expect(404)
         .then((result) => {
           expect(result.body.msg).toBe("User does not exist.");
         });

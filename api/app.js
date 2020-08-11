@@ -9,7 +9,7 @@ app.use(customError);
 
 
 app.all("*", (req, res, next) => {
-  res.status(400).send({ msg: "Path does not exist." });
+  res.status(404).send({ msg: "Path does not exist." });
 });
 
 module.exports = app; 

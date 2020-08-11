@@ -10,7 +10,7 @@ exports.sendUserByName = (username) => {
         return user;
       } else {
         return Promise.reject({
-          status: 400,
+          status: 404,
           msg: "User does not exist.",
         });
       }

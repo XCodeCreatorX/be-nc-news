@@ -11,7 +11,7 @@ exports.sendArticleByID = (id) => {
 
     .then((articles) => {
       if (articles.length < 1) {
-        return Promise.reject({ status: 400, msg: "Article does not exist." });
+        return Promise.reject({ status: 404, msg: "Article does not exist." });
       } else {
         return articles[0];
       }
